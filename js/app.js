@@ -8,10 +8,11 @@ let votingRounds = 25;
 // **** DOM Windows ****
 
 let imgContainer = document.getElementById('image-container');
-
 let imgOne = document.getElementById('imgOne');
 let imgTwo = document.getElementById('imgTwo');
 let imgThree = document.getElementById('imgThree');
+let results = document.getElementById('button');
+let resultsView = document.getElementById('results');
 
 
 
@@ -36,14 +37,6 @@ function renderImg(){
     imgTwoIndex = randomImg();
     imgThreeIndex = randomImg();
   }
-
-  // if (imgOne === imgTwo){
-  //   imgTwo = randomImg();
-  // }else if (imgOne === imgThree){
-  //   imgThree = randomImg();
-  // }else if (imgTwo === imgThree){
-  //   imgThree = randomImg();
-  // }
 
   imgOne.src = productsArray[imgOneIndex].image;
   imgOne.title = productsArray[imgOneIndex].name;
@@ -89,6 +82,16 @@ function handleImgClick(event){
 }
 
 
+function handleViewResults(){
+  if(votingRounds === 0){
+    for (let i = 0; i < productsArray.length; i++){
+      let resultsList = document.createElement('li');
+      resultsList.textContent = `${productsArray[i].name}: View:${productsArray[i].views} & Votes: ${productsArray[i].votes}`;
+      resultsView.appendChild(resultsList);
+    }
+    results.removeEventListener('click', handleViewResults);
+  }
+}
 
 // **** Executable Code ****
 
@@ -120,6 +123,7 @@ renderImg();
 
 imgContainer.addEventListener('click', handleImgClick);
 
+results.addEventListener('click', handleViewResults);
 
 
 

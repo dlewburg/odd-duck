@@ -8,7 +8,7 @@
 
 Created by: Dasha Burgos
 
-Assisted By: Raul(TA); Tammy(TA)
+Assisted By: Raul(TA); Tammy(TA); Tony(TA);
 
 ### Links and Resources
 
