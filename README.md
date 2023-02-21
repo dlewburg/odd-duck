@@ -8,12 +8,13 @@
 
 Created by: Dasha Burgos
 
-Assisted By:
+Assisted By: Raul(TA); Tammy(TA); Tony(TA);
 
 ### Links and Resources
 
-[Name Shows Instead of Link](link url)
+[In Class Demo](https://github.com/codefellows/seattle-code-201d97/tree/main/class-11/inclass-demo)
 
 ### Lighthouse Accessibility Report Score
+
 
 ### Reflections and Comments
