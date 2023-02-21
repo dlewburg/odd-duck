@@ -15,6 +15,6 @@ Assisted By: Raul(TA); Tammy(TA); Tony(TA);
 [In Class Demo](https://github.com/codefellows/seattle-code-201d97/tree/main/class-11/inclass-demo)
 
 ### Lighthouse Accessibility Report Score
-
+![Lighhouse Accessibility Report](img/Lab11-AccessibilityReport.png)
 
 ### Reflections and Comments
