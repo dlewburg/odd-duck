@@ -9,16 +9,16 @@ let votingRounds = 25;
 
 let imgContainer = document.getElementById('image-container');
 
-let firstImage = document.getElementById('imgOne');
-let secondImage = document.getElementById('imgTwo');
-let thirdImage = document.getElementById('imgThree');
+let imgOne = document.getElementById('imgOne');
+let imgTwo = document.getElementById('imgTwo');
+let imgThree = document.getElementById('imgThree');
 
 
 
 
 // **** Constructor Function ****
 
-function Products(name, fileExtension = '.jpg'){
+function Products(name, fileExtension = 'jpg'){
   this.name = name;
   this.image = `img/${name}.${fileExtension}`;
   this.votes = 0;
@@ -28,10 +28,39 @@ function Products(name, fileExtension = '.jpg'){
 // **** Helper Functions / Utilities ***
 
 function renderImg(){
-  let imgOne = randomImg();
-  let imgTwo = randomImg();
-  let imgThree = randomImg();
-  
+  let imgOneIndex = randomImg();
+  let imgTwoIndex = randomImg();
+  let imgThreeIndex = randomImg();
+
+  while(imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex){
+    imgTwoIndex = randomImg();
+    imgThreeIndex = randomImg();
+  }
+
+  // if (imgOne === imgTwo){
+  //   imgTwo = randomImg();
+  // }else if (imgOne === imgThree){
+  //   imgThree = randomImg();
+  // }else if (imgTwo === imgThree){
+  //   imgThree = randomImg();
+  // }
+
+  imgOne.src = productsArray[imgOneIndex].image;
+  imgOne.title = productsArray[imgOneIndex].name;
+  imgOne.alt = `this is an image of ${productsArray[imgOneIndex].name}`;
+
+  imgTwo.src = productsArray[imgTwoIndex].image;
+  imgTwo.title = productsArray[imgTwoIndex].name;
+  imgTwo.alt = `this is an image of ${productsArray[imgTwoIndex].name}`;
+
+  imgThree.src = productsArray[imgThreeIndex].image;
+  imgThree.title = productsArray[imgThreeIndex].name;
+  imgThree.alt = `this is an image of ${productsArray[imgThreeIndex].name}`;
+
+
+  productsArray[imgOneIndex].views++;
+  productsArray[imgTwoIndex].views++;
+  productsArray[imgThreeIndex].views++;
 
 }
 
@@ -56,7 +85,7 @@ let pen = new Products('pen');
 let petSweep = new Products('petSweep');
 let scissors = new Products('scissors');
 let shark = new Products('shark');
-let sweep = new Products('sweep');
+let sweep = new Products('sweep', 'png');
 let tauntaun = new Products('tauntaun');
 let unicorn = new Products('unicorn');
 let waterCan = new Products('waterCan');
@@ -64,7 +93,9 @@ let wineGlass = new Products('wineGlass');
 
 productsArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 
-// renderImg();
+console.log(productsArray);
+
+renderImg();
 
 
 
