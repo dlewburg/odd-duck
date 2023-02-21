@@ -64,10 +64,31 @@ function renderImg(){
 
 }
 
-// get random image
 function randomImg(){
   return Math.floor(Math.random() * productsArray.length);
 }
+
+function handleImgClick(event){
+
+  let imgClicked = event.target.title;
+
+  for (let i=0; i<productsArray.length; i++){
+    if(imgClicked === productsArray[i].name){
+      productsArray[i].votes++;
+    }
+  }
+
+  votingRounds--;
+
+  renderImg();
+
+  if(votingRounds === 0){
+    imgContainer.removeEventListener('click',handleImgClick);
+  }
+
+}
+
+
 
 // **** Executable Code ****
 
@@ -96,6 +117,8 @@ productsArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, ct
 console.log(productsArray);
 
 renderImg();
+
+imgContainer.addEventListener('click', handleImgClick);
 
 
 
