@@ -22,7 +22,7 @@ function Products(name, fileExtension = 'jpg'){
   this.image = `img/${name}.${fileExtension}`;
   this.votes = 0;
   this.views = 0;
-  // productsArray.push(this);
+  productsArray.push(this);
 }
 
 // **** Helper Functions / Utilities ***
@@ -70,18 +70,17 @@ function handleImgClick(event){
   for (let i=0; i<productsArray.length; i++){
     if(imgClicked === productsArray[i].name){
       productsArray[i].votes++;
+      votingRounds--;
+      renderImg();
     }
   }
 
-  votingRounds--;
-
-  renderImg();
 
   if(votingRounds === 0){
     imgContainer.removeEventListener('click',handleImgClick);
 
     let stringProducts = JSON.stringify(productsArray);
-    console.log('String Products >>>', stringProducts);
+
     localStorage.setItem('products', stringProducts);
   }
 }
@@ -169,13 +168,11 @@ if (returnedProducts){
       let reconstructedSweep = new Products(parsedProducts[i].name, 'png');
       reconstructedSweep.votes = parsedProducts[i].votes;
       reconstructedSweep.views = parsedProducts[i].views;
-      productsArray.push(reconstructedSweep);
 
     }else {
       let reconstructedProduct = new Products(parsedProducts[i].name);
       reconstructedProduct.votes = parsedProducts[i].votes;
       reconstructedProduct.views = parsedProducts[i].views;
-      productsArray.push(reconstructedProduct);
 
     }
   }
@@ -201,7 +198,6 @@ if (returnedProducts){
   let waterCan = new Products('waterCan');
   let wineGlass = new Products('wineGlass');
 
-  productsArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 }
 
 
