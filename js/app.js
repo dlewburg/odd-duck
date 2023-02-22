@@ -160,7 +160,9 @@ function handleViewResults(){
 
 // **** Executable Code ****
 
-// let returnedProducts = localStorage.getItem()
+let returnedProducts = localStorage.getItem(products);
+// let parsedProducts = JSON.parse(returnedProducts);
+
 
 let bag = new Products('bag');
 let banana = new Products('banana');
