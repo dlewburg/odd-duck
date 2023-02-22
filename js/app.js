@@ -82,7 +82,7 @@ function handleImgClick(event){
 
     let stringProducts = JSON.stringify(productsArray);
     console.log('String Products >>>', stringProducts);
-    localStorage.setItem('Storage', stringProducts);
+    localStorage.setItem('products', stringProducts);
   }
 }
 
