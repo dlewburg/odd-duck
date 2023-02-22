@@ -12,9 +12,7 @@ let imgOne = document.getElementById('imgOne');
 let imgTwo = document.getElementById('imgTwo');
 let imgThree = document.getElementById('imgThree');
 let results = document.getElementById('button');
-let resultsView = document.getElementById('results');
-
-
+let chartCanvas = document.getElementById('results');
 
 
 // **** Constructor Function ****
@@ -24,19 +22,23 @@ function Products(name, fileExtension = 'jpg'){
   this.image = `img/${name}.${fileExtension}`;
   this.votes = 0;
   this.views = 0;
+  productsArray.push(this);
 }
 
 // **** Helper Functions / Utilities ***
 
+let photoIndex = [];
 function renderImg(){
-  let imgOneIndex = randomImg();
-  let imgTwoIndex = randomImg();
-  let imgThreeIndex = randomImg();
-
-  while(imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex){
-    imgTwoIndex = randomImg();
-    imgThreeIndex = randomImg();
+  while(photoIndex.length < 6){
+    let randomPicture = randomImg();
+    if(!photoIndex.includes(randomPicture)){
+      photoIndex.push(randomPicture);
+    }
   }
+
+  let imgOneIndex = photoIndex.shift();
+  let imgTwoIndex = photoIndex.shift();
+  let imgThreeIndex = photoIndex.shift();
 
   imgOne.src = productsArray[imgOneIndex].image;
   imgOne.title = productsArray[imgOneIndex].name;
@@ -55,11 +57,11 @@ function renderImg(){
   productsArray[imgTwoIndex].views++;
   productsArray[imgThreeIndex].views++;
 
+  function randomImg(){
+    return Math.floor(Math.random() * productsArray.length);
+  }
 }
 
-function randomImg(){
-  return Math.floor(Math.random() * productsArray.length);
-}
 
 function handleImgClick(event){
 
@@ -82,13 +84,73 @@ function handleImgClick(event){
 }
 
 
+// ***** Fx to Render Chart
+
+function renderChart(){
+
+  let productName = [];
+  let productVotes = [];
+  let productViews = [];
+
+  for (let i = 0; i < productsArray.length; i++){
+    productName.push(productsArray[i].name);
+    productVotes.push(productsArray[i].votes);
+    productViews.push(productsArray[i].views);
+  }
+
+  let chartObj = {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: 'Numbers of Votes',
+        data: productVotes,
+        borderWidth: 1.5,
+        backgroundColor: ['#DA8A93'],
+        borderColor: ['#897C93'],
+        color: ['#FCFDF9'],
+      },
+      {
+        label: 'Number of Votes',
+        data: productViews,
+        borderWidth: 1,
+        backgroundColor: ['#897C93'],
+        borderColor: ['#DA8A93'],
+        color: ['#FCFDF9'],
+      }],
+    },
+    options: {
+      scales: {
+        y:  {
+          beginAtZero: true,
+          ticks: {
+            color: '#FCFDF9'
+          }
+        },
+        x: {
+          ticks: {
+            color: '#FCFDF9'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#FCFDF9'
+          }
+        }
+      }
+    }
+  };
+
+  new Chart(chartCanvas, chartObj);
+}
+
+
 function handleViewResults(){
   if(votingRounds === 0){
-    for (let i = 0; i < productsArray.length; i++){
-      let resultsList = document.createElement('li');
-      resultsList.textContent = `${productsArray[i].name}: View:${productsArray[i].views} & Votes: ${productsArray[i].votes}`;
-      resultsView.appendChild(resultsList);
-    }
+    renderChart();
+
     results.removeEventListener('click', handleViewResults);
   }
 }
@@ -115,15 +177,8 @@ let unicorn = new Products('unicorn');
 let waterCan = new Products('waterCan');
 let wineGlass = new Products('wineGlass');
 
-productsArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
-
-console.log(productsArray);
-
 renderImg();
 
 imgContainer.addEventListener('click', handleImgClick);
 
 results.addEventListener('click', handleViewResults);
-
-
-
