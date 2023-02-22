@@ -40,15 +40,6 @@ function renderImg(){
   let imgTwoIndex = photoIndex.shift();
   let imgThreeIndex = photoIndex.shift();
 
-  // let imgOneIndex = randomImg();
-  // let imgTwoIndex = randomImg();
-  // let imgThreeIndex = randomImg();
-
-  // while(imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex){
-  //   imgTwoIndex = randomImg();
-  //   imgThreeIndex = randomImg();
-  // }/
-
   imgOne.src = productsArray[imgOneIndex].image;
   imgOne.title = productsArray[imgOneIndex].name;
   imgOne.alt = `this is an image of ${productsArray[imgOneIndex].name}`;
@@ -158,11 +149,6 @@ function renderChart(){
 
 function handleViewResults(){
   if(votingRounds === 0){
-    // for (let i = 0; i < productsArray.length; i++){
-    //   let resultsList = document.createElement('li');
-    //   resultsList.textContent = `${productsArray[i].name}: View:${productsArray[i].views} & Votes: ${productsArray[i].votes}`;
-    //   resultsView.appendChild(resultsList);
-    // }
     renderChart();
 
     results.removeEventListener('click', handleViewResults);
@@ -190,8 +176,6 @@ let tauntaun = new Products('tauntaun');
 let unicorn = new Products('unicorn');
 let waterCan = new Products('waterCan');
 let wineGlass = new Products('wineGlass');
-
-// productsArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 
 renderImg();
 
