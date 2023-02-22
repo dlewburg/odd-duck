@@ -79,8 +79,11 @@ function handleImgClick(event){
 
   if(votingRounds === 0){
     imgContainer.removeEventListener('click',handleImgClick);
-  }
 
+    let stringProducts = JSON.stringify(productsArray);
+    console.log('String Products >>>', stringProducts);
+    localStorage.setItem('Storage', stringProducts);
+  }
 }
 
 
@@ -156,6 +159,8 @@ function handleViewResults(){
 }
 
 // **** Executable Code ****
+
+// let returnedProducts = localStorage.getItem()
 
 let bag = new Products('bag');
 let banana = new Products('banana');
